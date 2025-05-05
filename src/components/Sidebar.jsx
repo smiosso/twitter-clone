@@ -49,8 +49,7 @@ export default function Sidebar() {
 
           <button
             onClick={() => setIsModalOpen(true)}
-            className="flex items-center w-full gap-2 mt-4 bg-white text-black font-semibold py-2 justify-center rounded-full hover:bg-gray-300 transition"
-          >
+            className="flex items-center w-full gap-2 mt-4 bg-white text-black font-semibold py-2 justify-center rounded-full hover:bg-gray-300 transition">
             Post
           </button>
         </nav>
