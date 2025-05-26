@@ -1,25 +1,35 @@
+'use client';
 
+import { useEffect, useState } from 'react';
+import { getTweets } from '@/lib/api';
+import PostArea from '@/components/PostArea';
+import TweetCards from '@/components/TweetCards';
+import MainLayout from '@/components/MainLayout';
 
-import { getTweets } from "@/lib/api";
-import TweetCard from "@/components/TweetCards";
-import Link from "next/link";
-import PostArea from "@/components/PostArea";
-import MainLayout from "@/components/MainLayout";
+export default function HomePage() {
+  const [tweets, setTweets] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-export default async function Home() {
-  const tweets = await getTweets();
+  const loadTweets = async () => {
+    setLoading(true);
+    const data = await getTweets();
+    setTweets(data);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    loadTweets();
+  }, []);
 
   return (
     <MainLayout>
-      <h1 className="font-bold text-xl">For you</h1>
-      <PostArea />
-      <ul className="flex flex-col gap-6">
-        {tweets.posts.map((tweet) => (
-          <Link href={`/tweet/${tweet.id}`} key={tweet.id}>
-            <TweetCard tweet={tweet} />
-          </Link>
-        ))}
-      </ul>
+      <h1 className="text-xl font-bold">For you</h1>
+      <PostArea onPostSuccess={loadTweets} />
+      {loading ? (
+        <p className="text-white text-center mt-4">Loading tweets...</p>
+      ) : (
+        tweets.map((tweet) => <TweetCards key={tweet._id} tweet={tweet} />)
+      )}
     </MainLayout>
   );
 }
