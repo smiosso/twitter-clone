@@ -18,7 +18,15 @@ export default function MainLayout({ children }) {
       {/* Right Side (20%) */}
       <aside className="w-[20%] h-screen p-8 hidden md:block bg-black text-white">
         <div>
-          <p>placeholder</p>
+          <button
+          onClick={() => {
+            localStorage.removeItem('user');
+            location.href = '/login';
+          }}
+          className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700"
+        >
+          Logout
+        </button>
         </div>
       </aside>
     </div>
