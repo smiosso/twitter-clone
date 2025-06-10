@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link'; // <--- Importe o componente Link
 
 export default function LoginPage() {
   const router = useRouter();
@@ -11,7 +12,7 @@ export default function LoginPage() {
 
   const handleLogin = async () => {
     setError('');
-    const res = await fetch('/api/auth/login', {
+    const res = await fetch('/api/auth/login', { // Esta é a sua API Route para lidar com o login
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password }),
@@ -26,7 +27,7 @@ export default function LoginPage() {
     // Armazena o usuário logado localmente - localstorage
     localStorage.setItem('user', JSON.stringify(data.user));
 
-    // Redireciona para a home
+    // Redireciona para a home (página principal do app)
     router.push('/');
   };
 
@@ -54,6 +55,14 @@ export default function LoginPage() {
       >
         Entrar
       </button>
+
+      {/* Adicione o link para a página de registro aqui */}
+      <p className="mt-4 text-center">
+        Ainda não tem uma conta?{' '}
+        <Link href="/register" className="text-blue-400 hover:underline">
+          Registre-se aqui
+        </Link>
+      </p>
     </div>
   );
 }

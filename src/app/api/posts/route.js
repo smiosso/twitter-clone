@@ -9,7 +9,6 @@ export async function POST(request) {
 
   const newPost = await Post.create({
     content: body.content,
-    author: body.author,
   });
 
   return NextResponse.json(newPost, { status: 201 });

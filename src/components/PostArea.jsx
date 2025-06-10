@@ -21,7 +21,7 @@ export default function PostArea({ onPostSuccess }) {
       method: 'POST',
       body: JSON.stringify({
         content,
-        author: user.name
+        author: user.username
       }),
       headers: {
         'Content-Type': 'application/json'
