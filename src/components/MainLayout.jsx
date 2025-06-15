@@ -2,7 +2,10 @@
 // page.js and TweetCards.jsx use the same layout from MainLayout.jsx
 // MainLayout receives the contents of the page via the “prop” children
 
+import LogoutButton from "./LogoutButton";
 import SidebarWrapper from "./SidebarWrapper";
+
+
 
 export default function MainLayout({ children }) {
   return (
@@ -18,15 +21,7 @@ export default function MainLayout({ children }) {
       {/* Right Side (20%) */}
       <aside className="w-[20%] h-screen p-8 hidden md:block bg-black text-white">
         <div>
-          <button
-          onClick={() => {
-            localStorage.removeItem('user');
-            location.href = '/login';
-          }}
-          className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700"
-        >
-          Logout
-        </button>
+          <LogoutButton></LogoutButton>
         </div>
       </aside>
     </div>

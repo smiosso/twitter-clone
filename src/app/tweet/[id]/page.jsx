@@ -9,6 +9,7 @@ import MainLayout from "@/components/MainLayout";
 
 export default async function TweetDetail({ params }) {
   const tweet = await getTweet(params.id);
+  console.log('Tweet carregado:', tweet);
 
   return (
     <MainLayout>

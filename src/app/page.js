@@ -6,40 +6,56 @@ import { getTweets } from '@/lib/api';
 import PostArea from '@/components/PostArea';
 import TweetCards from '@/components/TweetCards';
 import MainLayout from '@/components/MainLayout';
+import Sidebar from '@/components/Sidebar';
+import Modal from '@/components/Modal';
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function HomePage() {
+  const { user, loading } = useAuth();
   const [tweets, setTweets] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
 
   const loadTweets = async () => {
-    setLoading(true);
     const data = await getTweets();
     setTweets(data);
-    setLoading(false);
   };
 
   useEffect(() => {
-    const user = localStorage.getItem('user');
-    if (!user) {
+    if (!loading && !user) {
       router.push('/login');
-    } else {
-      setIsLoggedIn(true);
+    }
+    if (!loading && user) {
       loadTweets();
     }
-  }, []);
+  }, [user, loading]);
 
-  if (!isLoggedIn) return null; // Evita piscar a tela até verificar login
+  // Evita flash de tela branca ou redirecionamento antes do AuthContext terminar de verificar
+  if (loading) return <p className="text-white text-center mt-4">Carregando sessão...</p>;
+  if (!user) return null; // userredirecionado
 
   return (
     <MainLayout>
+      <Sidebar onOpenModal={() => setIsModalOpen(true)} />
+
       <h1 className="text-xl font-bold">For you</h1>
+
       <PostArea onPostSuccess={loadTweets} />
-      {loading ? (
-        <p className="text-white text-center mt-4">Loading tweets...</p>
+
+      {tweets.length === 0 ? (
+        <p className="text-white text-center mt-4">Nenhum tweet encontrado.</p>
       ) : (
         tweets.map((tweet) => <TweetCards key={tweet._id} tweet={tweet} />)
+      )}
+
+      {isModalOpen && (
+        <Modal
+          onClose={() => setIsModalOpen(false)}
+          onPostSuccess={() => {
+            loadTweets();
+            setIsModalOpen(false);
+          }}
+        />
       )}
     </MainLayout>
   );

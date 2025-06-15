@@ -13,6 +13,10 @@ const UserSchema = new mongoose.Schema({
     required: true,
     minlength: 6,
   },
+  avatar: {
+    type: String,
+    default: 'https://i.pravatar.cc/150?u=default',
+  },
 }, { timestamps: true });
 
 export default mongoose.models.User || mongoose.model('User', UserSchema);

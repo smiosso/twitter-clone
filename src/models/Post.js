@@ -1,4 +1,3 @@
-
 import mongoose from 'mongoose';
 
 const PostSchema = new mongoose.Schema({
@@ -7,7 +6,8 @@ const PostSchema = new mongoose.Schema({
     required: true,
   },
   author: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
     required: true,
   },
   createdAt: {
@@ -16,5 +16,5 @@ const PostSchema = new mongoose.Schema({
   },
 });
 
-// Evita recriar o model em dev
+
 export default mongoose.models.Post || mongoose.model('Post', PostSchema);

@@ -9,6 +9,7 @@ export async function POST(request) {
 
   const newPost = await Post.create({
     content: body.content,
+    author: body.author,
   });
 
   return NextResponse.json(newPost, { status: 201 });
@@ -16,7 +17,12 @@ export async function POST(request) {
 
 export async function GET() {
   await makeSureDbIsReady();
-  const posts = await Post.find().sort({ createdAt: -1 });
+
+const posts = await Post.find()
+  .populate('author', 'username avatar')
+  .sort({ createdAt: -1 });
+
 
   return NextResponse.json(posts);
 }
+

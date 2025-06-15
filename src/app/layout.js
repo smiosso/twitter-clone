@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
 import Sidebar from "@/components/Sidebar";
+import { AuthProvider } from '@/contexts/AuthContext';
 
 
 
@@ -31,7 +32,9 @@ export default function RootLayout({ children }) {
           <Sidebar />
 
           <main className="ml-[20%] w-[80%]">
-            {children}
+          <AuthProvider>
+          {children}
+          </AuthProvider>
             </main>
         </div>
       </body>

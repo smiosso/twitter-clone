@@ -1,3 +1,5 @@
+// api/auth/register/route.js
+
 import { NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
 import User from '@/models/User';
@@ -15,7 +17,19 @@ export async function POST(req) {
 
   const hashed = await bcrypt.hash(password, 10);
 
-  const user = await User.create({ username, password: hashed });
+  const avatar = `https://i.pravatar.cc/150?u=${username}`;
 
-  return NextResponse.json({ message: 'Usuário criado', user: { id: user._id, username: user.username } }, { status: 201 });
+  const user = await User.create({ username, password: hashed, avatar });
+
+  return NextResponse.json(
+    {
+      message: 'Usuário criado',
+      user: {
+        id: user._id,
+        username: user.username,
+        avatar: user.avatar,
+      },
+    },
+    { status: 201 }
+  );
 }

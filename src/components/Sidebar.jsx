@@ -27,20 +27,16 @@ const menuItems = [
   { name: "More", href: "/", icon: MoreHorizontal },
 ];
 
-export default function Sidebar() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
+export default function Sidebar({ onOpenModal }) {
   return (
     <>
-      {/* Sidebar */}
       <header className="fixed top-20 left-20 w-[20%] h-screen bg-black text-white py-4 px-6 shadow-md flex flex-col items-center gap-5 z-10">
-        
         <nav className="flex flex-col w-48 items-start gap-4">
-        <img
-          className="w-8"
-          src="https://img.freepik.com/vektoren-kostenlos/neues-twitter-logo-x-icon-design-2023_1017-45418.jpg?semt=ais_hybrid&w=740"
-          alt="twitter logo"
-        />
+          <img
+            className="w-8"
+            src="https://img.freepik.com/vektoren-kostenlos/neues-twitter-logo-x-icon-design-2023_1017-45418.jpg?semt=ais_hybrid&w=740"
+            alt="twitter logo"
+          />
           {menuItems.map(({ name, href, icon: Icon }) => (
             <Link key={name} href={href} className="flex items-center gap-2">
               <Icon size={18} /> {name}
@@ -48,15 +44,13 @@ export default function Sidebar() {
           ))}
 
           <button
-            onClick={() => setIsModalOpen(true)}
-            className="flex items-center w-full gap-2 mt-4 bg-white text-black font-semibold py-2 justify-center rounded-full hover:bg-gray-300 transition">
+            onClick={onOpenModal}
+            className="flex items-center w-full gap-2 mt-4 bg-white text-black font-semibold py-2 justify-center rounded-full hover:bg-gray-300 transition"
+          >
             Post
           </button>
         </nav>
       </header>
-
-      {/* Modal */}
-      {isModalOpen && <Modal onClose={() => setIsModalOpen(false)} />}
     </>
   );
 }
