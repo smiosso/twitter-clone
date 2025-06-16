@@ -7,20 +7,23 @@ const AuthContext = createContext();
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
 
+
   useEffect(() => {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
+    fetch('/api/auth/me')
+      .then(res => res.json())
+      .then(data => setUser(data.user));
   }, []);
 
   const login = (userData) => {
-    localStorage.setItem('user', JSON.stringify(userData));
-    setUser(userData);
+
+    setUser({
+      _id: userData._id,
+      username: userData.username,
+      avatar: userData.avatar,
+    });
   };
 
   const logout = () => {
-    localStorage.removeItem('user');
     setUser(null);
   };
 

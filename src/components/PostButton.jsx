@@ -15,7 +15,7 @@ export default function PostButton({ content, onPostSuccess }) {
       method: 'POST',
       body: JSON.stringify({
         content,
-        author: user.username,
+        author: user._id || user.id,
       }),
       headers: {
         'Content-Type': 'application/json',

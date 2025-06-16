@@ -7,6 +7,7 @@ export async function POST(request) {
   await makeSureDbIsReady();
   const body = await request.json();
 
+  // body.author deve ser um ID de usuário (string)
   const newPost = await Post.create({
     content: body.content,
     author: body.author,
@@ -18,11 +19,9 @@ export async function POST(request) {
 export async function GET() {
   await makeSureDbIsReady();
 
-const posts = await Post.find()
-  .populate('author', 'username avatar')
-  .sort({ createdAt: -1 });
-
+  const posts = await Post.find()
+    .populate('author', 'username avatar')
+    .sort({ createdAt: -1 });
 
   return NextResponse.json(posts);
 }
-
