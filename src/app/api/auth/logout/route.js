@@ -1,16 +1,10 @@
-// import { NextResponse } from 'next/server';
-
-// export async function POST() {
-
-//   return NextResponse.json({ message: 'Logout efetuado' });
-// }
 
 
 // app/api/auth/logout/route.js
 import { NextResponse } from 'next/server';
 
 export async function POST() {
-  const response = NextResponse.json({ message: 'Logout efetuado' });
+  const response = NextResponse.json({ message: 'Goodbye, cruel app 👋' });
 
   response.cookies.set({
     name: 'token',

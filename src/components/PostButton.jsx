@@ -23,7 +23,7 @@ export default function PostButton({ content, onPostSuccess }) {
     });
 
     if (!res.ok) {
-      alert('Failed to post!');
+      alert('Send. Crash. Cry. 😢');
       return;
     }
 
@@ -35,9 +35,9 @@ export default function PostButton({ content, onPostSuccess }) {
   return (
     <button
       onClick={handlePost}
-      className="px-4 ml-auto gap-2 self-end border mt-4 bg-white text-black font-semibold py-2 justify-center rounded-full hover:bg-gray-300 transition"
+      className="font-copse px-4 ml-auto gap-2 self-end border mt-4 bg-white text-black py-2 justify-center rounded-full hover:bg-gray-300 transition"
     >
-      Post
+      Push the chaos. 🚀
     </button>
   );
 }

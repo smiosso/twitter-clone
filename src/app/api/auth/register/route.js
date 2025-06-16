@@ -12,7 +12,7 @@ export async function POST(req) {
 
   const userExists = await User.findOne({ username });
   if (userExists) {
-    return NextResponse.json({ error: 'Usuário já existe' }, { status: 400 });
+    return NextResponse.json({ error: 'User already exists' }, { status: 400 });
   }
 
   const hashed = await bcrypt.hash(password, 10);
@@ -23,7 +23,7 @@ export async function POST(req) {
 
   return NextResponse.json(
     {
-      message: 'Usuário criado',
+      message: 'It worked?! No way 😳',
       user: {
         id: user._id,
         username: user.username,

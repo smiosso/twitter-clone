@@ -14,7 +14,7 @@ export function AuthProvider({ children }) {
     const fetchUser = async () => {
       try {
         const res = await fetch('/api/auth/me');
-        if (!res.ok) throw new Error('Não autenticado');
+        if (!res.ok) throw new Error('Denied. Again. 🧱');
 
         const data = await res.json();
         setUser(data.user);
@@ -37,7 +37,7 @@ export function AuthProvider({ children }) {
 
     const data = await res.json();
 
-    if (!res.ok) throw new Error(data.error || 'Erro ao fazer login');
+    if (!res.ok) throw new Error(data.error || 'Login failed. Again. I swear the code worked yesterday 😩💻');
 
     setUser(data.user);
     Cookies.set('token', data.token);
@@ -45,7 +45,7 @@ export function AuthProvider({ children }) {
 
   const logout = async () => {
     await fetch('/api/auth/logout', { method: 'POST' });
-    Cookies.remove('token'); // só por garantia
+    Cookies.remove('token');
     setUser(null);
   };
 

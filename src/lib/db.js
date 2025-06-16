@@ -14,7 +14,7 @@ export async function makeSureDbIsReady() {
   }
 
   const MONGODB_URI = process.env.MONGODB_URI;
-  assert(MONGODB_URI, 'Please define the MONGODB_URI environment variable inside .env.local');
+  assert(MONGODB_URI,);
 
   if (!cached.promise) {
     cached.promise = mongoose.connect(MONGODB_URI, {

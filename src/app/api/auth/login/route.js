@@ -13,17 +13,17 @@ export async function POST(req) {
     const { username, password } = await req.json();
 
     if (!username || !password) {
-      return NextResponse.json({ error: 'Usuário e senha são obrigatórios' }, { status: 400 });
+      return NextResponse.json({ error: 'Username and password required' }, { status: 400 });
     }
 
     const user = await User.findOne({ username });
     if (!user) {
-      return NextResponse.json({ error: 'Credenciais inválidas' }, { status: 401 });
+      return NextResponse.json({ error: 'Bad credentials' }, { status: 401 });
     }
 
     const passwordMatch = await bcrypt.compare(password, user.password);
     if (!passwordMatch) {
-      return NextResponse.json({ error: 'Credenciais inválidas' }, { status: 401 });
+      return NextResponse.json({ error: 'Bad credentials' }, { status: 401 });
     }
 
     const tokenPayload = {
@@ -35,7 +35,7 @@ export async function POST(req) {
     const token = jwt.sign(tokenPayload, JWT_SECRET, { expiresIn: '7d' });
 
     const response = NextResponse.json({
-      message: 'Login bem-sucedido',
+      message: 'Login: success. I’m a hacker now 👨‍💻✨',
       user: tokenPayload,
     });
 
@@ -45,7 +45,7 @@ export async function POST(req) {
     return response;
 
   } catch (error) {
-    console.error('Erro na rota POST /api/auth/login:', error);
-    return NextResponse.json({ error: 'Erro interno do servidor' }, { status: 500 });
+    console.error('Error POST /api/auth/login:', error);
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }

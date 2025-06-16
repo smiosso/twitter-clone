@@ -5,6 +5,14 @@ import './globals.css';
 import Sidebar from '@/components/Sidebar';
 import { AuthProvider } from '@/contexts/AuthContext';
 import { usePathname } from 'next/navigation';
+import { Copse } from 'next/font/google';
+
+const copse = Copse({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-copse',
+});
+
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -31,7 +39,7 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} ${copse.variable} font-sans`}>
         <AuthProvider>
           <div className="flex">
             {!isPublicRoute && <Sidebar />}

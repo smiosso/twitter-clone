@@ -28,7 +28,7 @@ export default function Modal({ onClose, onPostSuccess }) {
             />
             <textarea
               className="text-white w-full h-7 px-2"
-              placeholder="What's happening?"
+              placeholder={user ? `Hello ${user.username}, Why are u crying?` : "Why are u crying?"}
               value={content}
               onChange={(e) => setContent(e.target.value)}
             />

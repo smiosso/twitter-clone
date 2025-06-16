@@ -13,7 +13,7 @@ export default function PostArea({ onPostSuccess }) {
       <div className="flex items-center gap-4">
         <textarea
           className="text-white w-full h-7 px-2"
-          placeholder={user ? `Hello ${user.username}, what's happening?` : "What's happening?"}
+          placeholder={user ? `Hello ${user.username}, Why are u crying?` : "Why are u crying?"}
           value={content}
           onChange={(e) => setContent(e.target.value)}
         />

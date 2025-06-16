@@ -5,7 +5,7 @@ export default function TweetCards({ tweet, onDelete }) {
   const author = tweet.author;
 
   if (!author || typeof author !== 'object') {
-    return null; // ou exibir um card vazio
+    return null;
   }
 
   return (

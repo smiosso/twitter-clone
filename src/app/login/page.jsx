@@ -16,10 +16,10 @@ export default function LoginPage() {
   const handleLogin = async () => {
     setError('');
     try {
-      await login(username, password); // supondo que login lance erro em falha
+      await login(username, password);
       router.push('/');
     } catch (err) {
-      setError(err.message || 'Erro ao fazer login');
+      setError(err.message || 'Login failed. Again. I swear the code worked yesterday 😩💻');
     }
   };
 
@@ -29,14 +29,14 @@ export default function LoginPage() {
       {error && <p className="text-red-500 mb-2">{error}</p>}
       <input
         type="text"
-        placeholder="Usuário"
+        placeholder="who are you?"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
         className="w-full p-2 mb-2 bg-black border border-gray-500 rounded"
       />
       <input
         type="password"
-        placeholder="Senha"
+        placeholder="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         className="w-full p-2 mb-4 bg-black border border-gray-500 rounded"
@@ -45,13 +45,13 @@ export default function LoginPage() {
         onClick={handleLogin}
         className="w-full bg-white text-black font-bold py-2 rounded"
       >
-        Entrar
+        Login
       </button>
 
       <p className="mt-4 text-center">
-        Ainda não tem uma conta?{' '}
+        New dev?{' '}
         <Link href="/register" className="text-blue-400 hover:underline">
-          Registre-se aqui
+          Create chaos. ⚙️🔥
         </Link>
       </p>
     </div>

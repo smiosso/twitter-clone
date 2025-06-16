@@ -19,7 +19,7 @@ export default function RegisterPage() {
 
     const data = await res.json();
     if (!res.ok) {
-      setError(data.error || 'Erro ao registrar');
+      setError(data.error || 'New user? Not today. 🚫');
       return;
     }
 
@@ -28,18 +28,18 @@ export default function RegisterPage() {
 
   return (
     <div className="max-w-md mx-auto mt-20 text-white">
-      <h2 className="text-2xl mb-4">Registrar</h2>
+      <h2 className="text-2xl mb-4">New here? Good luck 🍀</h2>
       {error && <p className="text-red-500 mb-2">{error}</p>}
       <input
         type="text"
-        placeholder="Usuário"
+        placeholder="who are you?"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
         className="w-full p-2 mb-2 bg-black border border-gray-500 rounded"
       />
       <input
         type="password"
-        placeholder="Senha"
+        placeholder="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         className="w-full p-2 mb-2 bg-black border border-gray-500 rounded"
@@ -48,7 +48,7 @@ export default function RegisterPage() {
         onClick={handleRegister}
         className="w-full bg-white text-black font-bold py-2 rounded"
       >
-        Registrar
+        New dev?
       </button>
     </div>
   );

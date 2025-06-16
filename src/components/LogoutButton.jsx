@@ -36,9 +36,9 @@ export default function LogoutButton() {
             localStorage.removeItem('user');
             location.href = '/login';
           }}
-          className="px-4 ml-auto gap-2 self-end mt-4 bg-black text-white py-2 justify-center rounded-full hover:bg-gray-800 transition"
+          className="font-copse px-4 w-[200px] ml-auto gap-2 self-end mt-4 bg-black text-white py-2 justify-center rounded-full hover:bg-gray-800 transition"
         >
-          Logout
+          Leave me OUT 😫
         </button>
 
   );
