@@ -3,9 +3,11 @@
 import { useState } from 'react';
 import { X } from 'lucide-react';
 import PostButton from './PostButton';
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function Modal({ onClose, onPostSuccess }) {
   const [content, setContent] = useState('');
+  const { user } = useAuth();
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-brightness-20">
@@ -20,7 +22,7 @@ export default function Modal({ onClose, onPostSuccess }) {
         <header className="flex flex-col p-4">
           <div className="flex items-center gap-4">
             <img
-              src="https://api.dicebear.com/7.x/avataaars/svg?seed=John"
+              src={user?.avatar || 'https://api.dicebear.com/7.x/avataaars/svg?seed=default'}
               alt="avatar"
               className="w-12 h-12 rounded-full"
             />

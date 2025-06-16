@@ -13,13 +13,13 @@ export default function MainLayout({ children }) {
       {/* Sidebar (20%) */}
       <SidebarWrapper />
 
-      {/* Main Content (60%) */}
-      <main className="w-[60%] mt-5 p-8 bg-black sm:p-20 flex flex-col gap-8">
+      {/* Main Content (70%) */}
+      <main className="w-[70%] mt-5 p-8 bg-black sm:p-20 flex flex-col gap-8">
         {children}
       </main>
 
-      {/* Right Side (20%) */}
-      <aside className="w-[20%] h-screen p-8 hidden md:block bg-black text-white">
+      {/* Right Side (10%) */}
+      <aside className="w-[10%] h-screen p-8 hidden md:block bg-black text-white">
         <div>
           <LogoutButton></LogoutButton>
         </div>

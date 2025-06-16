@@ -1,4 +1,7 @@
-export default function TweetCards({ tweet }) {
+import { useAuth } from '@/contexts/AuthContext';
+
+
+export default function TweetCards({ tweet, onDelete }) {
   const author = tweet.author;
 
   if (!author || typeof author !== 'object') {

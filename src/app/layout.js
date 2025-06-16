@@ -1,42 +1,45 @@
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import Link from "next/link";
-import Sidebar from "@/components/Sidebar";
+'use client';
+
+import { Geist, Geist_Mono } from 'next/font/google';
+import './globals.css';
+import Sidebar from '@/components/Sidebar';
 import { AuthProvider } from '@/contexts/AuthContext';
-
-
+import { usePathname } from 'next/navigation';
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
 });
 
-export const metadata = {
-  title: "Twitter",
-  description: "a crazy project",
-};
-
-
+// export const metadata = {
+//   title: 'Twitter',
+//   description: 'a crazy project',
+// };
 
 export default function RootLayout({ children }) {
+  const pathname = usePathname();
+
+  // Define rotas públicas onde NÃO quer o Sidebar
+  const publicRoutes = ['/login', '/register'];
+
+  const isPublicRoute = publicRoutes.includes(pathname);
+
   return (
     <html lang="en">
-      <body>
-        <div className="flex ">
-          
-          <Sidebar />
-
-          <main className="ml-[20%] w-[80%]">
-          <AuthProvider>
-          {children}
-          </AuthProvider>
+      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <AuthProvider>
+          <div className="flex">
+            {!isPublicRoute && <Sidebar />}
+            <main className={!isPublicRoute ? 'ml-[20%] w-[80%]' : 'w-full'}>
+              {children}
             </main>
-        </div>
+          </div>
+        </AuthProvider>
       </body>
     </html>
   );
