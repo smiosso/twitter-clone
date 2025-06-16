@@ -15,20 +15,12 @@ export default function LoginPage() {
 
   const handleLogin = async () => {
     setError('');
-    const res = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password }),
-    });
-
-    const data = await res.json();
-    if (!res.ok) {
-      setError(data.error || 'Erro ao fazer login');
-      return;
+    try {
+      await login(username, password); // supondo que login lance erro em falha
+      router.push('/');
+    } catch (err) {
+      setError(err.message || 'Erro ao fazer login');
     }
-
-    login(data.user);  // atualiza o contexto e localStorage
-    router.push('/');
   };
 
   return (
